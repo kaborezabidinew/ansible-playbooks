@@ -1,0 +1,26 @@
+---
+- name: Manage user and check time
+  hosts: all
+  become: true
+  ignore_errors: true 
+  vars:
+    user_name: zainil
+    group_name: devops
+  vars_files:
+  - variables.yml
+  tasks:
+  - name: check the time 
+    command: baiser
+      #  when: ansible_distribution == "zainil" or ansible_processor_nproc == 2
+  - name: create user abidine
+    user:
+       user: "{{user_name}}"
+       comment: kabore
+  - name: create group
+    group:
+      name: "{{group_name}}"
+      state: present 
+  - name: install package
+    package:
+      name: "{{pkg_name}}"
+      state: present 
